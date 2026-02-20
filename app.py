@@ -21,7 +21,7 @@ if uploaded_file is not None:
     normalized = img_array / 255.0
 
     # Create pseudo depth map
-    depth_map = cv2.GaussianBlur(normalized, (15, 15), 0)
+   depth_map = (normalized + np.roll(normalized, 1, axis=0) + np.roll(normalized, -1, axis=0)) / 3
 
     st.subheader("Depth Map Generated")
 
@@ -45,3 +45,4 @@ if uploaded_file is not None:
     st.plotly_chart(fig)
 
     st.success("Interactive 3D visualization ready!")
+
