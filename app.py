@@ -1,6 +1,5 @@
 import streamlit as st
 import numpy as np
-import cv2
 import plotly.graph_objects as go
 from PIL import Image
 
@@ -20,8 +19,12 @@ if uploaded_file is not None:
     # Normalize image
     normalized = img_array / 255.0
 
-    # Create pseudo depth map
-   depth_map = (normalized + np.roll(normalized, 1, axis=0) + np.roll(normalized, -1, axis=0)) / 3
+    # Simple smoothing (no OpenCV)
+    depth_map = (
+        normalized
+        + np.roll(normalized, 1, axis=0)
+        + np.roll(normalized, -1, axis=0)
+    ) / 3
 
     st.subheader("Depth Map Generated")
 
@@ -34,7 +37,6 @@ if uploaded_file is not None:
 
     fig.update_layout(
         title="3D Organ Surface (Simulated)",
-        autosize=True,
         scene=dict(
             xaxis_title="Width",
             yaxis_title="Height",
@@ -45,4 +47,3 @@ if uploaded_file is not None:
     st.plotly_chart(fig)
 
     st.success("Interactive 3D visualization ready!")
-
