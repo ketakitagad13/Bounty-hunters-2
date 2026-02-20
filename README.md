@@ -15,3 +15,6 @@ Prototype AI system that converts 2D medical scans into simulated 3D visualizati
 - True volumetric reconstruction
 - DICOM file support
 - Surgical simulation overlays
+
+Demo link
+https://bounty-hunters-2-nen5mzmszqbzzrtrfyzjhm.streamlit.app/
